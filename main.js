@@ -1,5 +1,4 @@
-// key : 2cX7dYaMvSEiuNamTY03eeJupY40BErq
-
+import "./style.scss";
 const apiKey = "2cX7dYaMvSEiuNamTY03eeJupY40BErq";
 
 const bodyDiv = document.getElementById("app");
@@ -27,11 +26,12 @@ function renderGifs(array, resetBody) {
   }
   array.forEach((element) => {
     const image = document.createElement("img");
-    image.src = element.images.downsized.url;
+    image.loading = "lazy";
+    image.src = element.images.fixed_height_small.url;
     bodyDiv.appendChild(image);
   });
 }
-document.addEventListener("scroll", function (searchBool) {
+document.addEventListener("scroll", function () {
   const scrollPosition = window.scrollY;
   const allWindowHeight = document.body.clientHeight;
   const windowHeigt = window.innerHeight;
@@ -43,28 +43,38 @@ document.addEventListener("scroll", function (searchBool) {
     requestCount == 0
   ) {
     requestCount++;
-    offset += 25;
-    getGifs(
-      `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25&offset=${offset}`
-    );
+    if (searchTxt.value != "") {
+      getGifs(
+        `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTxt.value}&limit=25&offset=${offset}&rating=g`
+      );
+    } else {
+      getGifs(
+        `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25&offset=${offset}`
+      );
+    }
 
-    console.log("istek gitti");
+    offset += 25;
   }
 });
 
 getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`);
+let timeOut;
+
+searchTxt.addEventListener("keydown", function (e) {
+  clearTimeout(timeOut);
+});
 
 searchTxt.addEventListener("keyup", function (e) {
-  const searchText = e.target.value;
-  console.log(e.target.value),
-    setTimeout(() => {
-      if (searchTxt == "") {
-        return getGifs(
-          `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`
-        );
-      }
-      getGifs(
-        `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTxt}&limit=25&offset=0&rating=g`
+  clearTimeout(timeOut);
+  timeOut = setTimeout(() => {
+    if (e.target.value == "") {
+      return getGifs(
+        `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`
       );
-    }, 3000);
+    }
+
+    getGifs(
+      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${e.target.value}&limit=25&offset=0&rating=g`
+    );
+  }, 500);
 });
