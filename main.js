@@ -5,6 +5,8 @@ const apiKey = "2cX7dYaMvSEiuNamTY03eeJupY40BErq";
 const bodyDiv = document.getElementById("app");
 const searchTxt = document.getElementById("search");
 const switchBtn = document.getElementById("toggle");
+const popupDiv = document.getElementById("popup-div");
+const popupCont = document.getElementById("popup-container");
 
 let requestCount = 0;
 let offset = 25;
@@ -50,15 +52,27 @@ function renderGifs(array, resetBody) {
       loadingDiv.style = "display:none";
       image.style = "display:block";
     });
+    imgWrapper.addEventListener("click", function () {
+      const popupImg = document.createElement("img");
+      popupImg.src = element.images.downsized_medium.url;
+      popupCont.innerHTML = "";
+      popupCont.appendChild(popupImg);
+      popupDiv.style = "display:flex";
+    });
   });
 }
-
+popupDiv.addEventListener("click", function (e) {
+  if (e.target.className == "popup") {
+    popupDiv.style = "display:none";
+  }
+});
 document.addEventListener("scroll", function () {
   const scrollPosition = window.scrollY;
   const allWindowHeight = document.body.clientHeight;
   const windowHeigt = window.innerHeight;
   const currentBottomLine = scrollPosition + windowHeigt;
   const requestScrollPosition = allWindowHeight - currentBottomLine;
+  console.log(requestScrollPosition);
   if (
     200 > requestScrollPosition &&
     requestScrollPosition > 100 &&
