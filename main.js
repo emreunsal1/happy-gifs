@@ -1,8 +1,10 @@
 import "./style.scss";
+import { loadingSvg } from "./loading";
 const apiKey = "2cX7dYaMvSEiuNamTY03eeJupY40BErq";
 
 const bodyDiv = document.getElementById("app");
 const searchTxt = document.getElementById("search");
+const switchBtn = document.getElementById("toggle");
 
 let requestCount = 0;
 let offset = 25;
@@ -24,13 +26,33 @@ function renderGifs(array, resetBody) {
   if (resetBody) {
     bodyDiv.innerHTML = "";
   }
+
   array.forEach((element) => {
+    const loadingDiv = document.createElement("div");
     const image = document.createElement("img");
-    image.loading = "lazy";
+    const imgWrapper = document.createElement("div");
+    const borderDiv = document.createElement("div");
+
+    loadingDiv.innerHTML = loadingSvg;
+    loadingDiv.style = "display:block";
+    borderDiv.className = "border-div";
+    imgWrapper.className = "image-wrapper";
     image.src = element.images.fixed_height_small.url;
-    bodyDiv.appendChild(image);
+    image.loading = "lazy";
+    image.style = "display:none";
+
+    imgWrapper.appendChild(loadingDiv);
+    imgWrapper.appendChild(image);
+    borderDiv.appendChild(imgWrapper);
+    bodyDiv.appendChild(borderDiv);
+
+    image.addEventListener("load", () => {
+      loadingDiv.style = "display:none";
+      image.style = "display:block";
+    });
   });
 }
+
 document.addEventListener("scroll", function () {
   const scrollPosition = window.scrollY;
   const allWindowHeight = document.body.clientHeight;
@@ -56,8 +78,9 @@ document.addEventListener("scroll", function () {
     offset += 25;
   }
 });
-
-getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`);
+window.addEventListener("load", () =>
+  getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`)
+);
 let timeOut;
 
 searchTxt.addEventListener("keydown", function (e) {
@@ -77,4 +100,14 @@ searchTxt.addEventListener("keyup", function (e) {
       `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${e.target.value}&limit=25&offset=0&rating=g`
     );
   }, 500);
+});
+let click = 0;
+
+switchBtn.addEventListener("click", function () {
+  if (click == 0) {
+    click++;
+    return (document.body.className = "light");
+  }
+  document.body.className = "";
+  click = 0;
 });
