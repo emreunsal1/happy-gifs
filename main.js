@@ -7,6 +7,7 @@ const searchTxt = document.getElementById("search");
 const switchBtn = document.getElementById("toggle");
 const popupDiv = document.getElementById("popup-div");
 const popupCont = document.getElementById("popup-container");
+const backBtn = document.getElementById("back-button");
 
 let requestCount = 0;
 let offset = 25;
@@ -40,31 +41,37 @@ function renderGifs(array, resetBody) {
     borderDiv.className = "border-div";
     imgWrapper.className = "image-wrapper";
     image.src = element.images.fixed_height_small.url;
-    image.loading = "lazy";
     image.style = "display:none";
+
+    image.addEventListener("load", () => {
+      loadingDiv.remove();
+      image.style = "display:block";
+    });
 
     imgWrapper.appendChild(loadingDiv);
     imgWrapper.appendChild(image);
     borderDiv.appendChild(imgWrapper);
     bodyDiv.appendChild(borderDiv);
 
-    image.addEventListener("load", () => {
-      loadingDiv.style = "display:none";
-      image.style = "display:block";
-    });
     imgWrapper.addEventListener("click", function () {
-      const popupImg = document.createElement("img");
-      popupImg.src = element.images.downsized_medium.url;
-      popupCont.innerHTML = "";
-      popupCont.appendChild(popupImg);
+      popupCont.querySelector("img").src = element.images.downsized_medium.url;
       popupDiv.style = "display:flex";
+      popupDiv.focus();
     });
   });
 }
-popupDiv.addEventListener("click", function (e) {
-  if (e.target.className == "popup") {
-    popupDiv.style = "display:none";
+popupDiv.addEventListener("keydown", (e) => {
+  if (e.key == "Escape") {
+    closePopup();
   }
+});
+function closePopup() {
+  popupDiv.style = "display:none";
+}
+
+backBtn.addEventListener("click", () => closePopup());
+popupDiv.addEventListener("click", function (e) {
+  if (e.target.className == "popup") closePopup();
 });
 document.addEventListener("scroll", function () {
   const scrollPosition = window.scrollY;

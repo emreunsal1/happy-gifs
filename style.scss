@@ -11,10 +11,6 @@ body {
   margin: 0;
   background-color: rgb(18, 18, 18);
   color: white;
-  position: relative;
-
-
-
 }
 
 .light {
@@ -59,7 +55,7 @@ body {
         background-image: linear-gradient(to right, #434343 0%, black 100%);
 
         &:before {
-          transform: translateX(90px);
+          transform: translateX(50px);
           background-color: rgb(255, 0, 0);
         }
       }
@@ -171,10 +167,31 @@ body {
     height: 50%;
     box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
     z-index: 99;
+    position: relative;
 
     img {
       width: 100%;
       height: 100%;
+    }
+
+    .back-div {
+      width: 40px;
+      height: 40px;
+      top: -35px;
+      right: -35px;
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+      cursor: pointer;
+
+      p {
+        font-size: 23px;
+        color: white;
+      }
+
     }
   }
 }
