@@ -39,6 +39,7 @@ function renderGifs(array, resetBody) {
     loadingDiv.innerHTML = loadingSvg;
     loadingDiv.style = "display:block";
     borderDiv.className = "border-div";
+    borderDiv.style = "cursor:pointer";
     imgWrapper.className = "image-wrapper";
     image.src = element.images.fixed_height_small.url;
     image.style = "display:none";
@@ -67,6 +68,7 @@ popupDiv.addEventListener("keydown", (e) => {
 });
 function closePopup() {
   popupDiv.style = "display:none";
+  popupCont.querySelector("img").src = "";
 }
 
 backBtn.addEventListener("click", () => closePopup());
