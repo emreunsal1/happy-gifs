@@ -6,6 +6,7 @@ export const popupDiv = document.getElementById("popup-div");
 export const popupCont = document.getElementById("popup-container");
 export const backBtn = document.getElementById("back-button");
 export const popularSearchDiv = document.getElementById("popular-search");
+export const lightModeLocalStrogeText = "light_mode";
 export const popularSearchArray = [
   "Cat",
   "Dog",

@@ -10,11 +10,16 @@ import {
   switchBtn,
   popupDiv,
   popularSearchArray,
+  lightModeLocalStrogeText,
 } from "./constants";
 
 let requestCount = 0;
 let offset = 25;
 let timeOut;
+
+if (!localStorage.getItem(lightModeLocalStrogeText)) {
+  setLightMode(false);
+}
 
 popularSearchArray.forEach((e) => {
   const newLi = document.createElement("li");
@@ -120,9 +125,10 @@ document.addEventListener("scroll", function () {
   }
 });
 
-window.addEventListener("load", () =>
-  getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`)
-);
+window.addEventListener("load", () => {
+  setLightMode(JSON.parse(localStorage.getItem(lightModeLocalStrogeText)));
+  getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`);
+});
 
 searchTxt.addEventListener("keydown", function (e) {
   clearTimeout(timeOut);
@@ -144,8 +150,10 @@ searchTxt.addEventListener("keyup", function (e) {
 });
 
 switchBtn.addEventListener("click", function (e) {
-  if (e.target.checked) {
-    return (document.body.className = "light");
-  }
-  document.body.className = "";
+  setLightMode(e.target.checked);
 });
+function setLightMode(condition) {
+  switchBtn.checked = condition;
+  localStorage.setItem(lightModeLocalStrogeText, JSON.stringify(condition));
+  document.body.className = condition ? "light" : "";
+}
