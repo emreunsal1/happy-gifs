@@ -8,10 +8,30 @@ const switchBtn = document.getElementById("toggle");
 const popupDiv = document.getElementById("popup-div");
 const popupCont = document.getElementById("popup-container");
 const backBtn = document.getElementById("back-button");
+const popularSearchDiv = document.getElementById("popular-search");
 
 let requestCount = 0;
 let offset = 25;
+const popularSearchArray = [
+  "Cat",
+  "Dog",
+  "Football",
+  "BasketBall",
+  "Twerk",
+  "Tiktok",
+];
 
+popularSearchArray.forEach((e) => {
+  const newLi = document.createElement("li");
+  newLi.innerHTML = "#" + e;
+  popularSearchDiv.querySelector("ul").appendChild(newLi);
+  newLi.addEventListener("click", () => {
+    searchTxt.value = e;
+    getGifs(
+      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${e}&limit=25&offset=0&rating=g`
+    );
+  });
+});
 async function getGifs(Link) {
   const response = await fetch(Link);
   const gifArray = await response.json();
@@ -56,6 +76,7 @@ function renderGifs(array, resetBody) {
 
     imgWrapper.addEventListener("click", function () {
       popupCont.querySelector("img").src = element.images.downsized_medium.url;
+      popupCont.querySelector("a").href = element.bitly_gif_url;
       popupDiv.style = "display:flex";
       popupDiv.focus();
     });
