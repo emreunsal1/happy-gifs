@@ -1,25 +1,20 @@
 import "./style.scss";
 import { loadingSvg } from "./loading";
-const apiKey = "2cX7dYaMvSEiuNamTY03eeJupY40BErq";
-
-const bodyDiv = document.getElementById("app");
-const searchTxt = document.getElementById("search");
-const switchBtn = document.getElementById("toggle");
-const popupDiv = document.getElementById("popup-div");
-const popupCont = document.getElementById("popup-container");
-const backBtn = document.getElementById("back-button");
-const popularSearchDiv = document.getElementById("popular-search");
+import {
+  apiKey,
+  popupCont,
+  backBtn,
+  bodyDiv,
+  popularSearchDiv,
+  searchTxt,
+  switchBtn,
+  popupDiv,
+  popularSearchArray,
+} from "./constants";
 
 let requestCount = 0;
 let offset = 25;
-const popularSearchArray = [
-  "Cat",
-  "Dog",
-  "Football",
-  "BasketBall",
-  "Twerk",
-  "Tiktok",
-];
+let timeOut;
 
 popularSearchArray.forEach((e) => {
   const newLi = document.createElement("li");
@@ -28,21 +23,19 @@ popularSearchArray.forEach((e) => {
   newLi.addEventListener("click", () => {
     searchTxt.value = e;
     getGifs(
-      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${e}&limit=25&offset=0&rating=g`
+      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${e}&limit=25&offset=${offset}&rating=g`
     );
   });
 });
+
 async function getGifs(Link) {
   const response = await fetch(Link);
   const gifArray = await response.json();
-  console.log(gifArray);
   if (requestCount > 0) {
     requestCount = 0;
-    console.log("sıfırlamadı");
     return renderGifs(gifArray.data, false);
   }
   renderGifs(gifArray.data, true);
-  console.log("sıfırladı");
 }
 
 function renderGifs(array, resetBody) {
@@ -69,40 +62,44 @@ function renderGifs(array, resetBody) {
       image.style = "display:block";
     });
 
-    imgWrapper.appendChild(loadingDiv);
-    imgWrapper.appendChild(image);
-    borderDiv.appendChild(imgWrapper);
-    bodyDiv.appendChild(borderDiv);
-
     imgWrapper.addEventListener("click", function () {
       popupCont.querySelector("img").src = element.images.downsized_medium.url;
       popupCont.querySelector("a").href = element.bitly_gif_url;
       popupDiv.style = "display:flex";
       popupDiv.focus();
     });
+
+    imgWrapper.appendChild(loadingDiv);
+    imgWrapper.appendChild(image);
+    borderDiv.appendChild(imgWrapper);
+    bodyDiv.appendChild(borderDiv);
   });
 }
+
 popupDiv.addEventListener("keydown", (e) => {
   if (e.key == "Escape") {
     closePopup();
   }
 });
+
 function closePopup() {
   popupDiv.style = "display:none";
   popupCont.querySelector("img").src = "";
 }
 
 backBtn.addEventListener("click", () => closePopup());
+
 popupDiv.addEventListener("click", function (e) {
   if (e.target.className == "popup") closePopup();
 });
+
 document.addEventListener("scroll", function () {
   const scrollPosition = window.scrollY;
   const allWindowHeight = document.body.clientHeight;
   const windowHeigt = window.innerHeight;
   const currentBottomLine = scrollPosition + windowHeigt;
   const requestScrollPosition = allWindowHeight - currentBottomLine;
-  console.log(requestScrollPosition);
+
   if (
     200 > requestScrollPosition &&
     requestScrollPosition > 100 &&
@@ -122,10 +119,10 @@ document.addEventListener("scroll", function () {
     offset += 25;
   }
 });
+
 window.addEventListener("load", () =>
   getGifs(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=25`)
 );
-let timeOut;
 
 searchTxt.addEventListener("keydown", function (e) {
   clearTimeout(timeOut);
@@ -145,13 +142,10 @@ searchTxt.addEventListener("keyup", function (e) {
     );
   }, 500);
 });
-let click = 0;
 
-switchBtn.addEventListener("click", function () {
-  if (click == 0) {
-    click++;
+switchBtn.addEventListener("click", function (e) {
+  if (e.target.checked) {
     return (document.body.className = "light");
   }
   document.body.className = "";
-  click = 0;
 });

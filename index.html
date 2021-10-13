@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
-</head>
-
-<body class="">
-  <div class="header">
-    <h1>Happy Gifs</h1>
-    <div class="dark-mode" id="dark-mode">
-      <input type="checkbox" id="toggle" />
-      <label for="toggle"></label>
-    </div>
-  </div>
-  <div class="search">
-    <input type="text" placeholder="Search" name="" id="search">
-  </div>
-  <div class="popular-search" id="popular-search">
-    <ul>
-
-    </ul>
-  </div>
-  <div id="app" class="app">
-
-
-  </div>
-  <div class="popup" id="popup-div" tabindex="0">
-    <div class="popup-container" id="popup-container">
-      <img src="">
-      <a href="" target="_blank">Click to download</a>
-      <div class="back-div" id="back-button">
-        <p>x</p>
+  <body class="">
+    <div class="header">
+      <h1>Happy Gifs</h1>
+      <div class="dark-mode" id="dark-mode">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle"></label>
       </div>
     </div>
-  </div>
-  <script type="module" src="/main.js"></script>
-</body>
-
+    <div class="search">
+      <input type="text" placeholder="Search" name="" id="search" />
+    </div>
+    <div class="popular-search" id="popular-search">
+      <ul></ul>
+    </div>
+    <div id="app" class="app"></div>
+    <div class="popup" id="popup-div" tabindex="0">
+      <div class="popup-container" id="popup-container">
+        <img />
+        <a target="_blank">Click to download</a>
+        <div class="back-div" id="back-button">
+          <p>x</p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>

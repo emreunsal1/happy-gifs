@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap");
 
 *,
 *::after,
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'ZCOOL KuaiLe', cursive;
+  font-family: "ZCOOL KuaiLe", cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
@@ -24,7 +24,6 @@ body {
     ul {
       li {
         border-color: rgb(18, 18, 18);
-
       }
     }
   }
@@ -32,34 +31,31 @@ body {
   .app {
     .border-div {
       background-image: none;
-      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 
       .image-wrapper {
         background-color: white;
       }
     }
-
   }
 
   .search {
     input {
       border: 2px solid black;
       color: black;
-
     }
   }
-
 }
-
 
 .header {
   text-align: center;
 
-
   h1 {
     margin: 60px 0px;
     position: relative;
-    font-family: 'ZCOOL KuaiLe', cursive;
+    font-family: "ZCOOL KuaiLe", cursive;
     font-size: 100px;
   }
 
@@ -68,11 +64,10 @@ body {
     right: 10px;
     top: -10px;
 
-
     input[type="checkbox"] {
       visibility: hidden;
 
-      &:checked+label {
+      &:checked + label {
         transform: rotate(360deg);
         background-image: linear-gradient(to right, #434343 0%, black 100%);
 
@@ -90,13 +85,13 @@ body {
       border: 6px solid;
       border-radius: 99em;
       position: relative;
-      transition: transform .75s ease-in-out;
+      transition: transform 0.75s ease-in-out;
       transform-origin: 50% 50%;
       cursor: pointer;
 
       &:before {
-        transition: transform .75s ease;
-        transition-delay: .5s;
+        transition: transform 0.75s ease;
+        transition-delay: 0.5s;
         content: "";
         display: block;
         position: absolute;
@@ -108,7 +103,6 @@ body {
         left: 3px;
       }
     }
-
   }
 }
 
@@ -117,10 +111,9 @@ body {
   margin: 20px auto;
   text-align: center;
 
-  @media (max-width:600px) {
+  @media (max-width: 600px) {
     width: 90%;
   }
-
 
   input {
     width: 400px;
@@ -131,10 +124,9 @@ body {
     background-color: transparent;
     color: white;
     padding: 15px;
-    font-family: 'ZCOOL KuaiLe', cursive;
+    font-family: "ZCOOL KuaiLe", cursive;
     font-size: 20px;
     display: inline-block;
-
 
     &:focus {
       box-shadow: rgb(255 255 255 / 25%) 0px 0px 20px 7px;
@@ -150,20 +142,18 @@ body {
   justify-content: center;
   align-items: center;
 
-  @media (max-width:600px) {
+  @media (max-width: 600px) {
     width: 100%;
   }
-
 
   ul {
     display: flex;
     list-style: none;
     margin-bottom: 20px;
 
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
       flex-wrap: wrap;
     }
-
 
     li {
       border: 2px solid white;
@@ -171,13 +161,11 @@ body {
       border-radius: 10px;
       margin: 0 15px;
 
-      @media (max-width:600px) {
+      @media (max-width: 600px) {
         min-width: 37%;
         max-width: 37%;
         margin-bottom: 10px;
       }
-
-
     }
   }
 }
@@ -189,22 +177,17 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 
-  @media (max-width:600px) {
+  @media (max-width: 600px) {
     width: 90%;
   }
-
-
-
 
   .border-div {
     background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
     width: calc(33% - 20px);
 
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
       width: 100%;
     }
-
-
 
     height: 400px;
     margin: 10px;
@@ -220,17 +203,12 @@ body {
       justify-content: center;
       align-items: center;
 
-
       img {
         width: 100%;
         height: 100%;
-
-
         object-fit: contain;
       }
-
     }
-
   }
 }
 
@@ -245,19 +223,19 @@ body {
   justify-content: center;
   inset: 0;
 
-
   .popup-container {
     width: 30%;
     height: 50%;
-    box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
+    box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px,
+      rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px,
+      rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
     z-index: 99;
     position: relative;
     background-color: black;
 
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
       min-width: 77%;
     }
-
 
     img {
       width: 100%;
@@ -273,13 +251,10 @@ body {
       color: white;
       font-size: 50px;
 
-      @media (max-width:600px) {
-
+      @media (max-width: 600px) {
         font-size: 30px;
       }
     }
-
-
 
     .back-div {
       width: 40px;
@@ -298,7 +273,6 @@ body {
         font-size: 23px;
         color: white;
       }
-
     }
   }
 }
